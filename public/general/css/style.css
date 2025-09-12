@@ -1,0 +1,10 @@
+@media (min-width: 768px) {
+    .sidebar-fixed-offcanvas .main-header, .sidebar-fixed .main-header {
+        padding-left: 0;
+    }
+}
+@media (min-width: 768px) {
+    .sidebar-fixed-offcanvas .page-wrapper, .sidebar-fixed .page-wrapper {
+       padding-left: 0;
+    }
+}
