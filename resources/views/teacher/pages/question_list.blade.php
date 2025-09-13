@@ -10,6 +10,7 @@
         <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>প্রশ্ন</th>
                     <th>ক্যাটাগরি</th>
                     <th>উত্তরের বিকল্প</th>
@@ -22,6 +23,7 @@
             <tbody>
                 @forelse($questions as $q)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $q->question_text }}</td>
                         <td>{{ $q->category->name ?? '-' }}</td>
                         <td>
@@ -45,9 +47,9 @@
                         </td>
                         <td>
                             @if($q->status == 'active')
-                                <span class="badge bg-success">সক্রিয়</span>
+                                <span class="badge bg-success badge-square">সক্রিয়</span>
                             @else
-                                <span class="badge bg-danger">নিষ্ক্রিয়</span>
+                                <span class="badge bg-danger badge-square">নিষ্ক্রিয়</span>
                             @endif
                         </td>
                         <td>
