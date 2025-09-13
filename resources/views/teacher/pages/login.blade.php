@@ -2,7 +2,7 @@
 
 
 @section('teacher_custom_style')
-    @if (!Route::is('teacher.login', 'teacher.register'))
+    @if (Route::is('teacherLogin', 'teacherRegister'))
         <style>
             @media (min-width: 768px) {
 

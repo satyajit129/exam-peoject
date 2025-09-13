@@ -21,8 +21,9 @@
        
         <div class="page-wrapper">
             {{-- Header --}}
-            @include('teacher.layouts.header', ['settings' => $settings])
-
+            @if (!Route::is('teacherLogin', 'teacherRegister'))
+                @include('teacher.layouts.header', ['settings' => $settings])
+            @endif
             <div class="content-wrapper">
                 <div class="content">
                     @yield('teacher_content')
@@ -36,7 +37,7 @@
 
     {{-- JS --}}
     @include('teacher.global.js_support', ['settings' => $settings])
-    @yield('general_custom_js')
+    @yield('teacher_custom_js')
 </body>
 
 </html>

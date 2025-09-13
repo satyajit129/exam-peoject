@@ -9,13 +9,9 @@ use Throwable;
 
 class TeacherAuthService
 {
-    /**
-     * Register a teacher
-     */
     public function handleRegister($request)
     {
         try {
-            // Validate the request with Bangla messages
             $request->validate(
                 [
                     'name'     => 'required',
@@ -32,8 +28,6 @@ class TeacherAuthService
                     'password.confirmed' => 'পাসওয়ার্ড নিশ্চিতকরণ মিলছে না।',
                 ]
             );
-
-            // Create new teacher
             $teacher = new Teacher();
             $teacher->name = $request->name;
             $teacher->email = $request->email;
@@ -45,10 +39,6 @@ class TeacherAuthService
             return redirect()->back()->with('error', 'রেজিস্ট্রেশন ব্যর্থ হয়েছে! ' . $th->getMessage())->withInput();
         }
     }
-
-    /**
-     * Login a teacher
-     */
     public function handleLoginRequest($request)
     {
         try {
@@ -75,10 +65,6 @@ class TeacherAuthService
             return redirect()->back()->with('error', 'লগইন ব্যর্থ হয়েছে! ' . $th->getMessage())->withInput();
         }
     }
-
-    /**
-     * Logout a teacher
-     */
     public function logout(): void
     {
         Auth::guard('teacher')->logout();
