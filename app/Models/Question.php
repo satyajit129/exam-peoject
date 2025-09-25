@@ -32,4 +32,9 @@ class Question extends Model
             'exam_id'                 // foreign key for PreviousExam
         )->withTimestamps(); // <- pivot table timestamps auto-fill
     }
+    // সঠিক অপশন relation
+    public function correctOption()
+    {
+        return $this->hasOne(QuestionOption::class)->where('is_correct', 1);
+    }
 }

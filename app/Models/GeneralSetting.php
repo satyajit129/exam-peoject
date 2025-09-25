@@ -9,6 +9,6 @@ class GeneralSetting extends Model
     protected $guarded = [];
     public static function getSetting()
     {
-        return self::first(); // assuming only one row
+        return self::first();
     }
 }

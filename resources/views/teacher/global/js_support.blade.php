@@ -49,7 +49,7 @@
         @if(session('warning'))
             showToast('warning', "{{ session('warning') }}");
         @endif
-        });
+    });
 
     function showToast(type, message) {
         toastr.options = {

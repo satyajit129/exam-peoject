@@ -21,6 +21,7 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link href="{{ asset('admin/source/plugins/toaster/toastr.min.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('admin/source/plugins/select2/css/select2.min.css') }}">
+
 <!-- MONO CSS -->
 <link id="main-css-href" rel="stylesheet" href="{{ asset('admin/source/css/style.css') }}" />
 <script src="{{ asset('admin/source/plugins/nprogress/nprogress.js') }}"></script>

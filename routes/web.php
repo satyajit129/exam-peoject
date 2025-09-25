@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 // General Routes
 
 Route::get('/',[GeneralController::class,'index'])->name('index');
@@ -41,10 +42,15 @@ Route::prefix('teacher')->group(function(){
         Route::get('/form/{id?}',[TeacherController::class,'questionForm'])->name('questionForm');
         Route::post('/save/{id?}',[TeacherController::class,'questionSave'])->name('questionSave');
         Route::get('/delete/{id}',[TeacherController::class,'questionDelete'])->name('questionDelete');
+        Route::get('/excel', [TeacherController::class, 'questionExcel'])->name('questionExcel');
+        Route::post('/upload-excel',[TeacherController::class,'questionUploadExcel'])->name('questionUploadExcel');
+        Route::get('/questions-by-category', [TeacherController::class, 'getQuestionsByCategory'])->name('getQuestionsByCategory');
+        Route::get('/teacher/questions/selected', [TeacherController::class, 'viewSelectedQuestions'])->name('viewSelectedQuestions');
+
     });
 
     Route::prefix('question-builder')->group(function(){
-        Route::get('/',[TeacherController::class,'questionBuilderIndex'])->name('questionBuilderIndex');
+        Route::get('/',[TeacherController::class,'questionBuilder'])->name('questionBuilder');
         Route::get('/form/{id?}',[TeacherController::class,'questionBuilderForm'])->name('questionBuilderForm');
         Route::post('/save/{id?}',[TeacherController::class,'questionBuilderSave'])->name('questionBuilderSave');
         Route::get('/delete/{id}',[TeacherController::class,'questionBuilderDelete'])->name('questionBuilderDelete');

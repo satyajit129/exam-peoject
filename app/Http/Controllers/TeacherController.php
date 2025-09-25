@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+use App\Models\QuestionCategory;
 use App\Services\TeacherAuthService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -108,6 +110,74 @@ class TeacherController extends Controller
         return $this->questionService->handleQuestionSave($request, $id);
     }
     public function questionDelete($id)
+    {
+        return $this->questionService->handleQuestionDelete($id);
+    }
+    public function questionExcel()
+    {
+        return $this->questionService->renderQuestionExcel();
+    }
+    public function questionUploadExcel(Request $request)
+    {
+        return $this->questionService->handleQuestionUploadExcel($request);
+    }
+    // Fetch questions by category (AJAX request)
+    public function getQuestionsByCategory(Request $request)
+    {
+        $category = QuestionCategory::findOrFail($request->category_id);
+        $categoryIds = $this->getAllCategoryIds($category);
+
+        $questions = Question::whereIn('category_id', $categoryIds)
+            ->with('options')
+            ->paginate(10);
+
+        // Receive previously selected question IDs
+        $selectedIds = $request->selected_ids ?? [];
+
+        // Return partial view
+        return view('teacher.pages.partials.questions_list', compact('questions', 'selectedIds'))->render();
+    }
+    public function viewSelectedQuestions(Request $request)
+    {
+        $ids = explode(',', $request->ids ?? []);
+        $questions = Question::whereIn('id', $ids)->with(['options', 'correctOption'])->get();
+
+        return view('teacher.pages.selected_questions', compact('questions'));
+    }
+
+
+
+
+    // Recursive function to get category and all children
+    private function getAllCategoryIds($category)
+    {
+        $ids = [$category->id];
+
+        foreach ($category->children as $child) {
+            $ids = array_merge($ids, $this->getAllCategoryIds($child));
+        }
+
+        return $ids;
+    }
+
+
+
+    public function questionBuilder()
+    {
+        return $this->questionService->renderQuestionBuilder();
+    }
+
+    public function questionBuilderForm($id = null)
+    {
+        return $this->questionService->renderQuestionForm($id);
+    }
+
+    public function questionBuilderSave(Request $request, $id = null)
+    {
+        return $this->questionService->handleQuestionSave($request, $id);
+    }
+
+    public function questionBuilderDelete($id)
     {
         return $this->questionService->handleQuestionDelete($id);
     }
